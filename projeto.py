@@ -19,9 +19,4 @@ with st.container():
     nome_remove = st.text_input("Nome do contato a ser removido:")
     if st.button('Remover'):
         st.write("Contato removido")
-@st.cache_data
-def carregar_dados():
-    lista = ...
-    return lista
 
-teste roberth
