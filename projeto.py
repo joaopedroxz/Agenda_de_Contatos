@@ -88,3 +88,53 @@ for i in range(vezes_deleçoes):
 print("Travessia após deleções:")
 lista.travessia()
 '''
+
+'''import streamlit as st
+
+class NoDuplo:
+    def __init__(self, dado):
+        self.dado = dado
+        self.proximo = None
+        self.anterior = None
+
+class ListaDupla:
+    def __init__(self):
+        self.primeiro = None
+        self.ultimo = None
+
+    def adicionar_no_final(self, dado):
+        novo_no = NoDuplo(dado)
+        if self.primeiro is None:
+            self.primeiro = novo_no
+            self.ultimo = novo_no
+        else:
+            novo_no.anterior = self.ultimo
+            self.ultimo.proximo = novo_no
+            self.ultimo = novo_no
+
+def main():
+    st.title("Streamlit com Lista Duplamente Encadeada")
+
+    # Use o cache do Streamlit para persistir a lista dupla entre as chamadas
+    @st.cache(allow_output_mutation=True)
+    def obter_ou_criar_lista():
+        return ListaDupla()
+
+    lista_dupla = obter_ou_criar_lista()
+
+    # Interface para adicionar dados à lista dupla
+    novo_dado = st.text_input("Digite um novo dado:")
+    if st.button("Adicionar à Lista"):
+        lista_dupla.adicionar_no_final(novo_dado)
+        st.success(f"{novo_dado} adicionado à lista!")
+
+    # Interface para exibir a lista dupla
+    st.header("Lista Dupla:")
+    no_atual = lista_dupla.primeiro
+    while no_atual is not None:
+        st.write(no_atual.dado)
+        no_atual = no_atual.proximo
+
+if __name__ == "__main__":
+    main()
+'''
