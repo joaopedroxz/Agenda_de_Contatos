@@ -1,24 +1,29 @@
 import streamlit as st
-#import pandas as pd
+import pandas as pd
 
 st.set_page_config(page_title="Agenda de Contatos")
 
 with st.container():
     st.title("Agenda de Contatos")
     st.write('---')
-    opc = st.sidebar.selectbox("Outras opções:", ("Buscar contato",))
+with st.container():
+    opc = st.sidebar.selectbox("Outras opções:", ("Buscar contato", "Enviar email",))
+    if opc == "Buscar contato":
+        st.subheader("Buscar")
+        st.text_input("Digite o nome de um contato para buscar:")
+with st.container():
     st.subheader("Adicionar novo contato:")
     nome = st.text_input("Nome:")
-    numero = st.text_input("Número:")
+    numero = st.text_input("Número:", help="(00) 00000-0000")
     categoria = st.selectbox("Categoria:", ["Familiares", "Amigos", "Conhecidos"])
-    if st.button("Salvar"):
+    if st.button("Salvar", help="Clique aqui para salvar"):
         st.write("Contato salvo")
-
 with st.container():
     st.subheader("Remover contato:")
     nome_remove = st.text_input("Nome do contato a ser removido:")
-    if st.button('Remover'):
+    if st.button('Remover', help="Clique aqui para remover"):
         st.write("Contato removido")
+
 
 '''
 #parteroberth
