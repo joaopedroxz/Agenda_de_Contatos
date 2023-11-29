@@ -89,52 +89,60 @@ print("Travessia após deleções:")
 lista.travessia()
 '''
 
+
+
+#codigo com armazenamento
+
+
 '''import streamlit as st
 
-class NoDuplo:
-    def __init__(self, dado):
-        self.dado = dado
+class contato:
+    def __init__(self, nome, numero):
+        self.nome = nome
+        self.numero = numero
         self.proximo = None
         self.anterior = None
 
-class ListaDupla:
+class Listacontatos:
     def __init__(self):
-        self.primeiro = None
-        self.ultimo = None
+        self.cabeca = None
+        self.cauda = None
 
-    def adicionar_no_final(self, dado):
-        novo_no = NoDuplo(dado)
-        if self.primeiro is None:
-            self.primeiro = novo_no
-            self.ultimo = novo_no
+    def adicionar_no_final(self, nome, numero):
+        novo_no = contato(nome, numero)
+        if self.cabeca is None:
+            self.cabeca = novo_no
+            self.cauda = novo_no
         else:
-            novo_no.anterior = self.ultimo
-            self.ultimo.proximo = novo_no
-            self.ultimo = novo_no
+            novo_no.anterior = self.cauda
+            self.cauda.proximo = novo_no
+            self.cauda = novo_no
 
 def main():
-    st.title("Streamlit com Lista Duplamente Encadeada")
+    st.title("Lista de contatos")
 
     # Use o cache do Streamlit para persistir a lista dupla entre as chamadas
     @st.cache(allow_output_mutation=True)
     def obter_ou_criar_lista():
-        return ListaDupla()
+        return Listacontatos()
 
     lista_dupla = obter_ou_criar_lista()
 
     # Interface para adicionar dados à lista dupla
-    novo_dado = st.text_input("Digite um novo dado:")
-    if st.button("Adicionar à Lista"):
-        lista_dupla.adicionar_no_final(novo_dado)
-        st.success(f"{novo_dado} adicionado à lista!")
+    novo_nome = st.text_input("Digite um novo nome:")
+    novo_numero = st.text_input("Digite um novo numero:")
+    if st.button("registrar"):
+        lista_dupla.adicionar_no_final(novo_nome, novo_numero)
+        st.success(f"({novo_nome}, {novo_numero}) registrado!")
 
     # Interface para exibir a lista dupla
-    st.header("Lista Dupla:")
-    no_atual = lista_dupla.primeiro
+    st.header("Contatos:")
+    no_atual = lista_dupla.cabeca
     while no_atual is not None:
-        st.write(no_atual.dado)
+        st.write(f"Nome: {no_atual.nome}, Numero: {no_atual.numero}")
         no_atual = no_atual.proximo
 
 if __name__ == "__main__":
     main()
+
 '''
