@@ -77,6 +77,7 @@ with st.container():
     if st.button("Salvar"):
         lista_dupla.adicionar_no_final(nome, numero)
         st.success(f"Nome: {nome} | Número: {numero} registrado!")
+        st.experimental_rerun()
 
 with st.container():
     st.subheader("Remover contato:")
@@ -90,6 +91,10 @@ with st.container():
     if opc == "Buscar contato":
         st.subheader("Buscar")
         st.text_input("Digite o nome de um contato para buscar:")
+        if st.button("Buscar"):
+            #CHAMADA DA FUNÇÃO DO JON
+            st.success(f"O contato de nome com número numero foi encontrado!")
+
 
 
 
