@@ -24,6 +24,73 @@ with st.container():
     if st.button('Remover', help="Clique aqui para remover"):
         st.write("Contato removido")
 
+#JUNÇÃO DOS CÓDIGOS
+import streamlit as st
+
+class contato:
+    def __init__(self, nome, numero):
+        self.nome = nome
+        self.numero = numero
+        self.proximo = None
+        self.anterior = None
+
+class Listacontatos:
+    def __init__(self):
+        self.cabeca = None
+        self.cauda = None
+
+    def adicionar_no_final(self, nome, numero):
+        novo_no = contato(nome, numero)
+        if self.cabeca is None:
+            self.cabeca = novo_no
+            self.cauda = novo_no
+        else:
+            novo_no.anterior = self.cauda
+            self.cauda.proximo = novo_no
+            self.cauda = novo_no
+
+st.set_page_config(page_title="Agenda de Contatos")
+
+
+@st.cache(allow_output_mutation=True)
+def obter_ou_criar_lista():
+    return Listacontatos()
+
+lista_dupla = obter_ou_criar_lista()
+
+st.header("Sua Agenda de Contatos:")
+no_atual = lista_dupla.cabeca
+while no_atual is not None:
+    st.write(f"Nome: {no_atual.nome} --- Número: {no_atual.numero}")
+    no_atual = no_atual.proximo
+
+
+with st.container():
+    st.title("Agenda de Contatos")
+    st.write('---')
+
+with st.container():
+    st.subheader("Adicionar novo contato:")
+    nome = st.text_input("Nome:")
+    numero = st.text_input("Número:", help="(00) 00000-0000")
+    #categoria = st.selectbox("Categoria:", ["Familiares", "Amigos", "Conhecidos"])
+    if st.button("Salvar"):
+        lista_dupla.adicionar_no_final(nome, numero)
+        st.success(f"Nome: {nome} | Número: {numero} registrado!")
+
+with st.container():
+    st.subheader("Remover contato:")
+    nome_remove = st.text_input("Nome do contato a ser removido:")
+    if st.button("Remover"):
+        lista_dupla.remover_no_inicio(nome, numero)
+        st.success(f"O contato de {nome} foi removido da sua Agenda!")
+
+with st.container():
+    opc = st.sidebar.selectbox("Outras opções:", ("Buscar contato", "Enviar email",))
+    if opc == "Buscar contato":
+        st.subheader("Buscar")
+        st.text_input("Digite o nome de um contato para buscar:")
+
 
 
 
