@@ -1,3 +1,192 @@
+#codigo que aparentemente deu certo
+import streamlit as st
+
+class Contato:
+    def __init__(self, nome, numero):
+        self.nome = nome
+        self.numero = numero
+        self.anterior = None
+        self.proximo = None
+
+class Listacontatos:
+    def __init__(self):
+        self.cabeca = None
+        self.cauda = None
+
+    def adicionar_contato(self, nome, numero):
+        novo_contato = Contato(nome, numero)
+
+        if self.cauda is None:
+            self.cabeca = novo_contato
+            self.cauda = novo_contato
+        else:
+            novo_contato.anterior = self.cauda
+            self.cauda.proximo = novo_contato
+            self.cauda = novo_contato
+        self.ordenar_contatos()
+
+    def mover_remover(self, nome):
+        atual = self.cabeca
+
+        while atual:
+
+            if atual.nome == nome:
+                if atual == self.cabeca:
+                    return self.apagar_primeiro_contato()
+
+                anterior = atual.anterior
+                proximo = atual.proximo
+
+                if anterior:
+                    anterior.proximo = proximo
+                else:
+                    self.cabeca = proximo
+
+                if proximo:
+                    proximo.anterior = anterior
+                else:
+                    self.cauda = anterior
+
+                atual.proximo = self.cabeca
+                atual.anterior = None
+                self.cabeca.anterior = atual
+                self.cabeca = atual
+
+                return self.apagar_primeiro_contato()
+
+            if atual.proximo == None:
+                print("Não encontrado")
+                return
+            atual = atual.proximo
+
+    def apagar_primeiro_contato(self):
+        if self.cabeca is None:
+            return
+
+        primeiro_contato = self.cabeca
+        self.cabeca = primeiro_contato.proximo
+
+        if self.cabeca:
+            self.cabeca.anterior = None
+        else:
+            self.cauda = None
+
+        del primeiro_contato
+
+
+
+    def ordenar_contatos(self):
+        if self.cabeca is None or self.cabeca.proximo is None:
+            return
+
+        no_atual = self.cabeca.proximo
+        self.cabeca.proximo = None
+
+        while no_atual is not None:
+            no_seguinte = no_atual.proximo
+
+            if no_atual.nome.lower() < self.cabeca.nome.lower():
+                no_atual.proximo = self.cabeca
+                self.cabeca = no_atual
+            else:
+                temp = self.cabeca
+                while temp.proximo is not None and no_atual.nome.lower() > temp.proximo.nome.lower():
+                    temp = temp.proximo
+                no_atual.proximo = temp.proximo
+                temp.proximo = no_atual
+
+            no_atual = no_seguinte
+
+    def busca_binaria(self, nome):
+        inicio = 0
+        fim = self.contar_contatos() - 1
+
+        while inicio <= fim:
+            meio = (inicio + fim) // 2
+            posicao = 0
+            atual = self.cabeca
+
+            # Encontrar o meio na lista encadeada
+            while posicao < meio:
+                atual = atual.proximo
+                posicao += 1
+
+            # Verificar se o nome está no meio da lista
+            if atual.nome.lower() == nome.lower():
+                return atual
+            elif atual.nome.lower() < nome.lower():
+                inicio = meio + 1
+            else:
+                fim = meio - 1
+
+        return None
+
+    def contar_contatos(self):
+        contador = 0
+        atual = self.cabeca
+        while atual:
+            contador += 1
+            atual = atual.proximo
+        return contador
+
+# Restante do seu código Streamlit permanece o mesmo...
+
+st.set_page_config(page_title="Agenda de Contatos")
+
+
+@st.cache(allow_output_mutation=True)
+def obter_ou_criar_lista():
+    return Listacontatos()
+
+lista_dupla = obter_ou_criar_lista()
+
+st.header("Sua Agenda de Contatos:")
+contato_atual = lista_dupla.cabeca
+while contato_atual is not None:
+    st.write(f"Nome: {contato_atual.nome} --- Número: {contato_atual.numero}")
+    contato_atual = contato_atual.proximo
+
+
+with st.container():
+    st.title("Agenda de Contatos")
+    st.write('---')
+
+with st.container():
+    st.subheader("Adicionar novo contato:")
+    nome = st.text_input("Nome:")
+    numero = st.text_input("Número:", help="(00) 00000-0000")
+    #categoria = st.selectbox("Categoria:", ["Familiares", "Amigos", "Conhecidos"])
+    if st.button("Salvar"):
+        lista_dupla.adicionar_contato(nome, numero)
+        st.success(f"Nome: {nome} | Número: {numero} registrado!")
+
+with st.container():
+    st.subheader("Remover contato:")
+    nome_remove = st.text_input("Nome do contato a ser removido:")
+    if st.button("Remover"):
+        lista_dupla.mover_remover(nome_remove)
+        st.success(f"O contato de {nome_remove} foi removido da sua Agenda!")
+
+# Seu código anterior ...
+
+with st.container():
+    opc = st.sidebar.selectbox("Outras opções:", ("Buscar contato", "Enviar email",))
+    if opc == "Buscar contato":
+        st.subheader("Buscar")
+        nome_busca = st.text_input("Digite o nome de um contato para buscar:")
+
+        if st.button("Buscar"):
+            nome_busca = nome_busca.strip().lower()  # Remover espaços extras e transformar em minúsculas
+            resultado_busca = lista_dupla.busca_binaria(nome_busca)
+
+            if resultado_busca:
+                st.success(f"Contato encontrado - Nome: {resultado_busca.nome} | Número: {resultado_busca.numero}")
+            else:
+                st.error("Contato não encontrado.")
+
+
+
+#=============================================================================================================
 import streamlit as st
 import pandas as pd
 
