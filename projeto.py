@@ -521,7 +521,7 @@ with st.container():
 
 ###################################################################################
 #Ordenacao e busca prontos
-"""import streamlit as st
+'''import streamlit as st
 
 class Contato:
     def __init__(self, nome, numero):
@@ -532,11 +532,13 @@ class Contato:
 class Listacontatos:
     def __init__(self):
         self.cabeca = None
+        self.cauda = None
 
     def adicionar_no_final(self, nome, numero):
         novo_no = Contato(nome, numero)
         if self.cabeca is None:
             self.cabeca = novo_no
+            self.cauda = novo_no
         else:
             atual = self.cabeca
             while atual.proximo is not None:
@@ -652,4 +654,4 @@ with st.container():
                 st.success(f"Contato encontrado - Nome: {resultado_busca.nome} | Número: {resultado_busca.numero}")
             else:
                 st.error("Contato não encontrado.")
-"""
+'''
