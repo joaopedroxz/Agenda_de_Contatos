@@ -14,7 +14,10 @@ class Listacontatos:
     def __init__(self):
         self.cabeca = None
         self.cauda = None
-
+        
+#para seguir o comportamento de uma fila, vamos adionar ao final e remover no inicio
+    
+    #adiciona dados no final da lista
     def adicionar_contato(self, nome, numero):
         novo_contato = Contato(nome, numero)
 
@@ -26,7 +29,8 @@ class Listacontatos:
             self.cauda.proximo = novo_contato
             self.cauda = novo_contato
         self.ordenar_contatos()
-
+        
+    #move o contato escolhido para a cabeca e chama função para remover
     def mover_remover(self, nome):
         atual = self.cabeca
 
@@ -61,6 +65,7 @@ class Listacontatos:
                 return
             atual = atual.proximo
 
+    #apaga o primeiro contato
     def apagar_primeiro_contato(self):
         if self.cabeca is None:
             return
