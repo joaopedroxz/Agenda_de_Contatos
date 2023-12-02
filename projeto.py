@@ -225,8 +225,8 @@ with st.container():
             else:
                 st.error("Contato não encontrado.")
 
-    if opc == "Buscar contato por categoria":
-        st.subheader("Buscar")
+    if opc == "Buscar contatos por categoria":
+        st.subheader("Buscar por categoria")
         categoria_busca = st.text_input("Digite a categoria para buscar:")
 
         if st.button("Buscar"):
