@@ -1,4 +1,5 @@
 #CÓDIGO QUASE PRONTO
+import time
 import streamlit as st
 #from awesome_streamlit.shared.components import awesome_icons
 
@@ -14,13 +15,12 @@ class Listacontatos:
     def __init__(self):
         self.cabeca = None
         self.cauda = None
-        
-#para seguir o comportamento de uma fila, vamos adionar ao final e remover no inicio
-    
-    #adiciona dados no final da lista
-    def adicionar_contato(self, nome, numero):
-        novo_contato = Contato(nome, numero)
 
+    def adicionar_contato(self, nome, numero):
+        if self.busca_binaria(nome):
+            st.warning("Este contato já existe na sua Agenda!")
+            return
+        novo_contato = Contato(nome, numero)
         if self.cauda is None:
             self.cabeca = novo_contato
             self.cauda = novo_contato
@@ -29,8 +29,7 @@ class Listacontatos:
             self.cauda.proximo = novo_contato
             self.cauda = novo_contato
         self.ordenar_contatos()
-        
-    #move o contato escolhido para a cabeca e chama função para remover
+
     def mover_remover(self, nome):
         atual = self.cabeca
 
@@ -65,7 +64,6 @@ class Listacontatos:
                 return
             atual = atual.proximo
 
-    #apaga o primeiro contato
     def apagar_primeiro_contato(self):
         if self.cabeca is None:
             return
@@ -199,17 +197,23 @@ with st.container():
                 st.success(f"Contato encontrado\n- Nome: {resultado_busca.nome}\n- Número: {resultado_busca.numero}")
                 st.write("Opções:")
                 url_whatsapp = f"https://wa.me/{resultado_busca.numero}"
-                st.markdown(f"[Encaminhar para o WhatsApp]({url_whatsapp})", help="Abrir Whatsapp")
-                
+                st.link_button('Encaminhar para o Whatsapp', url_whatsapp, help="Abrir Whatsapp")
+                #st.link_button('Enviar um email')
+
             else:
                 st.error("Contato não encontrado.")
 
 
-#st.sidebar.header("Configurações")
-#user_input = st.sidebar.text_input("Digite algo:")
+if st.sidebar.button('Atualizar página'):
+    with st.spinner("Atualizando..."):
+        time.sleep(2)
+        st.experimental_rerun()
+        st.empty()
+
 
 
 display_contact_list()
+
 
 
 
