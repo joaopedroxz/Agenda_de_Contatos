@@ -1176,18 +1176,29 @@ class Listacontatos:
         self.cauda = None
 
     def adicionar_contato(self, nome, numero, categoria):
-        if self.busca_binaria(nome):
-            st.warning("Este contato já existe na sua Agenda!")
-            return
         novo_contato = Contato(nome, numero, categoria)
-        if self.cauda is None:
+
+        if self.cabeca is None:
             self.cabeca = novo_contato
             self.cauda = novo_contato
         else:
-            novo_contato.anterior = self.cauda
-            self.cauda.proximo = novo_contato
-            self.cauda = novo_contato
-        self.ordenar_contato(nome, numero, categoria)
+            atual = self.cabeca
+            while atual is not None and nome.lower() > atual.nome.lower():
+                atual = atual.proximo
+
+            if atual is None:  # Inserir no final
+                self.cauda.proximo = novo_contato
+                novo_contato.anterior = self.cauda
+                self.cauda = novo_contato
+            elif atual.anterior is None:  # Inserir no início
+                novo_contato.proximo = self.cabeca
+                self.cabeca.anterior = novo_contato
+                self.cabeca = novo_contato
+            else:  # Inserir no meio
+                novo_contato.proximo = atual
+                novo_contato.anterior = atual.anterior
+                atual.anterior.proximo = novo_contato
+                atual.anterior = novo_contato
 
     def mover_remover(self, nome):
         atual = self.cabeca
@@ -1219,7 +1230,7 @@ class Listacontatos:
                 return self.apagar_primeiro_contato()
 
             if atual.proximo == None:
-                st.error("Não encontrado")
+                print("Não encontrado")
                 return
             atual = atual.proximo
 
@@ -1237,30 +1248,6 @@ class Listacontatos:
 
         del primeiro_contato
 
-    def ordenar_contato(self, nome, numero, categoria):
-        novo_contato = Contato(nome, numero, categoria)
-
-        if self.cabeca is None:
-            self.cabeca = novo_contato
-            self.cauda = novo_contato
-        else:
-            atual = self.cabeca
-            while atual is not None and nome.lower() > atual.nome.lower():
-                atual = atual.proximo
-
-            if atual is None:  # Inserir no final
-                self.cauda.proximo = novo_contato
-                novo_contato.anterior = self.cauda
-                self.cauda = novo_contato
-            elif atual.anterior is None:  # Inserir no início
-                novo_contato.proximo = self.cabeca
-                self.cabeca.anterior = novo_contato
-                self.cabeca = novo_contato
-            else:  # Inserir no meio
-                novo_contato.proximo = atual
-                novo_contato.anterior = atual.anterior
-                atual.anterior.proximo = novo_contato
-                atual.anterior = novo_contato
 
     def busca_binaria(self, nome):
         inicio = 0
@@ -1269,11 +1256,11 @@ class Listacontatos:
             meio = (inicio + fim) // 2
             posicao = 0
             atual = self.cabeca
-            # encontrar o meio na lista encadeada
+            # Encontrar o meio na lista encadeada
             while posicao < meio:
                 atual = atual.proximo
                 posicao += 1
-            #vendo se o nome está no meio da lista
+            # Verificar se o nome está no meio da lista
             if atual.nome.lower() == nome.lower():
                 return atual
             elif atual.nome.lower() < nome.lower():
@@ -1316,7 +1303,9 @@ def obter_ou_criar_lista():
         st.session_state.lista_dupla = Listacontatos()
     return st.session_state.lista_dupla
 
-def imprimir_agenda():
+# Função para exibir a lista de contatos
+
+def display_contact_list():
     st.header("Sua Agenda de Contatos:")
     lista_dupla = obter_ou_criar_lista()
     contato_atual = lista_dupla.cabeca
@@ -1324,8 +1313,11 @@ def imprimir_agenda():
         st.write(f"Nome: {contato_atual.nome}")
         st.write(f"Categoria: {contato_atual.categoria}")
         st.write(f"Número: {contato_atual.numero}")
+
         st.write("---")
         contato_atual = contato_atual.proximo
+
+
 
 with st.container():
     st.title("Agenda de Contatos")
@@ -1359,7 +1351,6 @@ with st.container():
             #st.experimental_rerun()
     else:
         st.warning("Digite um nome para ser removido")
-
 with st.container():
     opc = st.sidebar.selectbox("Outras opções:", ("Home", "Buscar contato", "Buscar contato por categoria"))
     if opc == "Buscar contato":
@@ -1378,23 +1369,25 @@ with st.container():
                     '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">',
                     unsafe_allow_html=True)
                 st.link_button('Encaminhar para o Whatsapp', url_whatsapp, help="Abrir Whatsapp")
+                # st.link_button('Enviar um email')
 
             else:
                 st.error("Contato não encontrado.")
 
     if opc == "Buscar contato por categoria":
-        st.subheader("Buscar")
+        st.subheader("Buscar por categoria")
         categoria_busca = st.text_input("Digite a categoria para buscar:")
 
         if st.button("Buscar"):
             lista_dupla = obter_ou_criar_lista()
 
-            #exibindo contatos por categoria
+
+            # Exibindo contatos por categoria
             contatos_por_categoria = lista_dupla.obter_contatos_por_categoria(categoria_busca)
             if contatos_por_categoria:
                 st.subheader(f"Contatos da categoria '{categoria_busca}':")
                 for contato in contatos_por_categoria:
-                    st.success(f"Nome: {contato.nome}\n- Número: {contato.numero}")
+                    st.write(f"Nome: {contato.nome}, Número: {contato.numero}")
             else:
                 st.warning(f"Nenhum contato encontrado na categoria '{categoria_busca}'.")
 
@@ -1407,6 +1400,7 @@ if st.sidebar.button('Atualizar página'):
         st.experimental_rerun()
         st.empty()
 
-imprimir_agenda()
 
+
+display_contact_list()
 st.caption("Desenvolvido por João Pedro, Roberth e Jonata.")
