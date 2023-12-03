@@ -34,7 +34,7 @@ Para instalar a biblioteca, vá até o terminal e digite "pip install streamlit"
 
 6. Instruções de Uso:
 Para utilizar o programa, é necessário inserir dados de nome, categoria e número, e confirmar cada funcionalidade.
-As funcionalidades do programa incluem: adicionar contato com nome, categoria e número (o número obrigatoriamente com 11 dígitos, pressione Enter após a adição dos 11 dígitos), remover contato digitando um nome, buscar por nome com campo de pesquisa e resultado exibindo o nome pesquisado com botão de direcionamento para o WhatsApp, buscar por categoria com campo de 
+As funcionalidades do programa incluem: adicionar contato com nome, categoria e número (o número obrigatoriamente com 11 dígitos, pressione Enter após a adição dos 11 dígitos), remover contato digitando um nome, buscar por nome com campo de pesquisa e resultado exibindo o nome pesquisado com botão de direcionamento para o WhatsApp, buscar por categoria com campo de pesquisa e resultado exibindo todos os contatos com determinada categoria. Botão para atualizar a página.
 
 https://github.com/joaopedroxz/projeto.py/assets/151971019/b09c52c9-7b8e-495d-8a45-39c6cef13993
 
@@ -42,7 +42,7 @@ https://github.com/joaopedroxz/projeto.py/assets/151971019/b09c52c9-7b8e-495d-8a
 https://github.com/joaopedroxz/projeto.py/assets/151971019/779f7be3-1252-40ac-b684-e8f2cac6090e
 
 
-pesquisa e resultado exibindo todos os contatos com determinada categoria. Botão para atualizar a página.
+
 
 7.Referências:
   - Slides fornecidos pela professora
