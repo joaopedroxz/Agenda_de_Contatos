@@ -45,6 +45,8 @@ A ordenação ocorre sem a necessidade de reorganizar toda a lista, apenas ajust
   Se o nome buscado for menor, ajusta o intervalo para a metade inferior.
   Retorno:
   Se o nome buscado for encontrado, retorna o nó correspondente; caso contrário, retorna None.
+
+  
 5.  Instruções de Execução:
 Para usar o código, é necessário ter instalada em seu idle a biblioteca Streamlit.
 Para instalar a biblioteca, vá até o terminal e digite "pip install streamlit" e aguarde a instalação. Com a biblioteca instalada, vá até o terminal e execute o Streamlit com o comando "streamlit run projeto.py", onde "projeto.py" deve ser substituído pelo nome do arquivo onde está o código. O Streamlit fornecerá um link para acessar a aplicação.
