@@ -28,7 +28,7 @@ Estrutura da Lista Preservada:
 A ordenação ocorre sem a necessidade de reorganizar toda a lista, apenas ajustando os ponteiros entre os contatos para manter a estrutura encadeada.
   Essa abordagem permite que a lista encadeada seja organizada alfabeticamente pelos nomes completos dos contatos, garantindo que a inserção de novos contatos mantenha a ordem correta na lista.
 
-5.Buca  binaria em lista duplamente encadeada:
+ Busca  binaria em lista duplamente encadeada:
     A lista duplamente encadeada deve estar ordenada para que a busca binária seja aplicada corretamente.
   1 - Funcionamento:
     Recebe o nome a ser buscado na lista encadeada.
@@ -45,11 +45,11 @@ A ordenação ocorre sem a necessidade de reorganizar toda a lista, apenas ajust
   Se o nome buscado for menor, ajusta o intervalo para a metade inferior.
   Retorno:
   Se o nome buscado for encontrado, retorna o nó correspondente; caso contrário, retorna None.
-6.  Instruções de Execução:
+5.  Instruções de Execução:
 Para usar o código, é necessário ter instalada em seu idle a biblioteca Streamlit.
 Para instalar a biblioteca, vá até o terminal e digite "pip install streamlit" e aguarde a instalação. Com a biblioteca instalada, vá até o terminal e execute o Streamlit com o comando "streamlit run projeto.py", onde "projeto.py" deve ser substituído pelo nome do arquivo onde está o código. O Streamlit fornecerá um link para acessar a aplicação.
 
-7. Instruções de Uso:
+6. Instruções de Uso:
 Para utilizar o programa, é necessário inserir dados de nome, categoria e número, e confirmar cada funcionalidade.
 As funcionalidades do programa incluem: adicionar contato com nome, categoria e número (o número obrigatoriamente com 11 dígitos, pressione Enter após a adição dos 11 dígitos), remover contato digitando um nome, buscar por nome com campo de pesquisa e resultado exibindo o nome pesquisado com botão de direcionamento para o WhatsApp, buscar por categoria com campo de pesquisa e resultado exibindo todos os contatos com determinada categoria. Botão para atualizar a página.
 
