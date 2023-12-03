@@ -5,7 +5,7 @@
 2. Autores:
   Xotape - 231021478
   Roberth Nascimento de Jesus - 231021487
-  Jhon 
+  Jon 231021342
   
 3. Contexto de Aplicação:
   Com o objetivo de armazenar dados de um contato em uma lista, de forma que tenhamos livre acesso para fazer a travessia, foi escolhida a estrutura de lista duplamente encadeada. Essa lista possui o comportamento de fila, com a intenção de que os primeiros dados a serem inseridos na lista devem ser também os primeiros a serem processados. Os dados são inseridos no fim da lista e são removidos e processados no início da lista.
@@ -15,8 +15,11 @@ Ordenação após inserção:
   Lista duplamente encadeada com comportamento de fila:
   Armazenamento dos dados com livre travessia entre eles, armazenamento e processamento de dados com a regra de que o primeiro contato inserido é sempre o primeiro a ser processado. Estruturas relevantes para dar ordem nos processamentos e armazenamento de dados de forma que facilite a implementação de operações que envolvem manipulação de nós adjacentes.
 
-  Ordenação após inserção:
-  
+5. Ordenação após inserção:
+    1 - Criação de uma lista temporária: Ao adicionar novos contatos, os elementos da lista encadeada são copiados para uma lista temporária.
+    2 - Ordenação com base nos nomes completos: A lista temporária é ordenada com base nos nomes completos (considerando letras minúsculas para a comparação).
+    3 - Reconstrução da lista encadeada: Após a ordenação, a lista encadeada é reconstruída usando a sequência ordenada da lista temporária, mantendo os ponteiros para os nós adjacentes.
+  Essa abordagem permite que a lista encadeada seja organizada alfabeticamente pelos nomes completos dos contatos, garantindo que a inserção de novos contatos mantenha a ordem correta na lista.
 
 5. Instruções de Execução:
 Para usar o código, é necessário ter instalada em seu idle a biblioteca Streamlit.
