@@ -5,7 +5,7 @@
 2. Autores:
   João Pedro Sousa Vasconcelos - 231021478
   Roberth Nascimento de Jesus - 231021487
-  Jon 231021342
+  JONATA BARBOSA SEVERO 231021342
   
 3. Contexto de Aplicação:
   Com o objetivo de armazenar dados de um contato em uma lista, de forma que tenhamos livre acesso para fazer a travessia, foi escolhida a estrutura de lista duplamente encadeada. Essa lista possui o comportamento de fila, com a intenção de que os primeiros dados a serem inseridos na lista devem ser também os primeiros a serem processados. Os dados são inseridos no fim da lista e são removidos e processados no início da lista.
