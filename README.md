@@ -3,7 +3,7 @@
   Uma agenda de contatos com funções adicionais, como adição de categoria aos contatos, filtragem por categoria escolhida e direcionamento para conversa no WhatsApp. codigo feito em phyton
 
 2. Autores:
-  Xotape - 231021478
+  João Pedro Sousa Vasconcelos - 231021478
   Roberth Nascimento de Jesus - 231021487
   Jon 231021342
   
@@ -40,5 +40,5 @@ As funcionalidades do programa incluem: adicionar contato com nome, categoria e 
   - Slides fornecidos pela professora
   - Codigos github professora Geovana
   - Descobrimos o streamlit em um post do instragam: https://www.instagram.com/p/Czw1zH6tydC/?igshid=MzRlODBiNWFlZA==
-  - Video do canal "hashtag Programação" para saber mais sobre a biblioteca: https://youtu.be/0sxWFeFlsHs?si=PnccEu3YLrPOcYe7
+  - Video do canal "Hashtag Programação" para saber mais sobre a biblioteca: https://youtu.be/0sxWFeFlsHs?si=PnccEu3YLrPOcYe7
   - Site com documentação do streamlit: https://docs.streamlit.io
