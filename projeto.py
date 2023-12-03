@@ -18,17 +18,15 @@ class Listacontatos:
         self.cabeca = None
         self.cauda = None
 
-    def adicionar_contato(self, nome, numero, categoria):
-        if self.busca_binaria(nome):
-            st.warning("Este contato já existe na sua Agenda!")
-            return
+        def adicionar_contato(self, nome, numero, categoria):
         novo_contato = Contato(nome, numero, categoria)
-        if self.cauda is None:
+
+        if self.cabeca is None:
             self.cabeca = novo_contato
             self.cauda = novo_contato
         else:
-            novo_contato.anterior = self.cauda
             self.cauda.proximo = novo_contato
+            novo_contato.anterior = self.cauda
             self.cauda = novo_contato
         self.ordenar_contatos()
 
