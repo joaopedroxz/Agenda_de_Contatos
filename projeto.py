@@ -18,17 +18,30 @@ class Listacontatos:
         self.cabeca = None
         self.cauda = None
 
-        def adicionar_contato(self, nome, numero, categoria):
+    def adicionar_contato(self, nome, numero, categoria):
         novo_contato = Contato(nome, numero, categoria)
 
         if self.cabeca is None:
             self.cabeca = novo_contato
             self.cauda = novo_contato
         else:
-            self.cauda.proximo = novo_contato
-            novo_contato.anterior = self.cauda
-            self.cauda = novo_contato
-        self.ordenar_contatos()
+            atual = self.cabeca
+            while atual is not None and nome.lower() > atual.nome.lower():
+                atual = atual.proximo
+
+            if atual is None:  # Inserir no final
+                self.cauda.proximo = novo_contato
+                novo_contato.anterior = self.cauda
+                self.cauda = novo_contato
+            elif atual.anterior is None:  # Inserir no início
+                novo_contato.proximo = self.cabeca
+                self.cabeca.anterior = novo_contato
+                self.cabeca = novo_contato
+            else:  # Inserir no meio
+                novo_contato.proximo = atual
+                novo_contato.anterior = atual.anterior
+                atual.anterior.proximo = novo_contato
+                atual.anterior = novo_contato
 
     def mover_remover(self, nome):
         atual = self.cabeca
@@ -80,23 +93,32 @@ class Listacontatos:
 
 
 
-    def ordenar_contatos(self):
-        if self.cabeca is None or self.cabeca.proximo is None:
-            return
-        no_atual = self.cabeca.proximo
-        self.cabeca.proximo = None
-        while no_atual is not None:
-            no_seguinte = no_atual.proximo
-            if no_atual.nome.lower() < self.cabeca.nome.lower():
-                no_atual.proximo = self.cabeca
-                self.cabeca = no_atual
-            else:
-                temp = self.cabeca
-                while temp.proximo is not None and no_atual.nome.lower() > temp.proximo.nome.lower():
-                    temp = temp.proximo
-                no_atual.proximo = temp.proximo
-                temp.proximo = no_atual
-            no_atual = no_seguinte
+def adicionar_contato(self, nome, numero, categoria):
+    novo_contato = Contato(nome, numero, categoria)
+
+    if self.cabeca is None:
+        self.cabeca = novo_contato
+        self.cauda = novo_contato
+    else:
+        atual = self.cabeca
+        while atual is not None and nome.lower() > atual.nome.lower():
+            atual = atual.proximo
+
+        if atual is None:  # Inserir no final
+            self.cauda.proximo = novo_contato
+            novo_contato.anterior = self.cauda
+            self.cauda = novo_contato
+        elif atual.anterior is None:  # Inserir no início
+            novo_contato.proximo = self.cabeca
+            self.cabeca.anterior = novo_contato
+            self.cabeca = novo_contato
+        else:  # Inserir no meio
+            novo_contato.proximo = atual
+            novo_contato.anterior = atual.anterior
+            atual.anterior.proximo = novo_contato
+            atual.anterior = novo_contato
+
+
 
     def busca_binaria(self, nome):
         inicio = 0
