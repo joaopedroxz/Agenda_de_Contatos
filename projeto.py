@@ -254,7 +254,7 @@ if st.sidebar.button('Atualizar página'):
 
 
 display_contact_list()
-
+st.caption("Desenvolvido por João Pedro, Roberth e Jonata.")
 ########################################################################################################################################################
 #QUASE PRONTO COM ICONE DO WPP
 
