@@ -1134,7 +1134,7 @@ with st.container():
 ################################################################################################################################################
 ###############################################################################################################################################
 ###############################################################################################################################################
-ESSE AQUI 
+### ARRUMEI O NEGOCIO DOS NOMES 
 import streamlit as st
 
 
@@ -1221,20 +1221,26 @@ class Listacontatos:
     def ordenar_contatos(self):
         if self.cabeca is None or self.cabeca.proximo is None:
             return
-        no_atual = self.cabeca.proximo
-        self.cabeca.proximo = None
-        while no_atual is not None:
-            no_seguinte = no_atual.proximo
-            if no_atual.nome.lower() < self.cabeca.nome.lower():
-                no_atual.proximo = self.cabeca
-                self.cabeca = no_atual
-            else:
-                temp = self.cabeca
-                while temp.proximo is not None and no_atual.nome.lower() > temp.proximo.nome.lower():
-                    temp = temp.proximo
-                no_atual.proximo = temp.proximo
-                temp.proximo = no_atual
-            no_atual = no_seguinte
+
+        # Cria uma lista temporária para armazenar os contatos
+        temp_list = []
+        contato_atual = self.cabeca
+        while contato_atual is not None:
+            temp_list.append(contato_atual)
+            contato_atual = contato_atual.proximo
+
+        # Ordena a lista temporária com base no nome completo
+        temp_list.sort(key=lambda x: x.nome.lower())
+
+        # Reconstrói a lista encadeada com base na lista temporária ordenada
+        self.cabeca = temp_list[0]
+        self.cabeca.anterior = None
+        self.cauda = temp_list[-1]
+        self.cauda.proximo = None
+
+        for i in range(len(temp_list) - 1):
+            temp_list[i].proximo = temp_list[i + 1]
+            temp_list[i + 1].anterior = temp_list[i]
 
     def busca_binaria(self, nome):
         inicio = 0
